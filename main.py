@@ -1,5 +1,3 @@
-# main.py
-
 from app_data import set_stock_symbol, set_chart_type, set_time_series, set_dates, get_chart_type
 from api_handler import fetch_stock_data
 from chart_generator import generate_chart

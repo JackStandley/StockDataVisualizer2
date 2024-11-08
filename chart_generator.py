@@ -1,4 +1,3 @@
-# chart_generator.py
 
 import pygal
 from pygal.style import Style
@@ -12,20 +11,20 @@ def generate_chart(chart_type):
         return None
     print("Stock data successfully received")
 
-    # Initialize chart
+    #intitialize chart
     chart = pygal.Bar() if chart_type == "Bar" else pygal.Line()
     data_points = extract_data_points(stock_data)
     if data_points and data_points["dates"]:
         chart.title = f"Stock Data for {get_stock_symbol()}: {get_start_date()} to {get_end_date()}"
         chart.x_labels = [datetime.strptime(date, "%Y-%m-%d").strftime("%b %d") for date in data_points["dates"]]
     
-        # Add series for each type of stock data
+        #add series for each type of stock data
         chart.add("Open", data_points["Open"])
         chart.add("High", data_points["High"])
         chart.add("Low", data_points["Low"])
         chart.add("Close", data_points["Close"])
 
-        # Return the chart as an SVG string
+        #return the chart as an SVG string
         return chart.render(is_unicode=True)
     else:
         print("No data available within the selected date range.")
