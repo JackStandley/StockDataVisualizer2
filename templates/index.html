@@ -1,61 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Stock Data Visualizer</title>
-   <style>
-       .container {
-           width: 100%;
-           text-align: center;
-           padding: 30px;
-           background-color: white;
-           align-items: center;
-       }
-       .container h1 {
-           text-align: center;
-       }
-   </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Data Visualizer</title>
+  <style>
+      .container {
+          width: 100%;
+          text-align: center;
+          padding: 30px;
+          background-color: white;
+          align-items: center;
+      }
+      .container h1 {
+          text-align: center;
+      }
+  </style>
 </head>
 <body style="background-color: darkturquoise;">
 <div class="container">
-   <h1>Stock Data Visualizer</h1>
-   <form action="/generate_chart" method="POST">
-       <div>
-           <label for="symbol">Choose Symbol:</label>
-           <select id="symbol" name="symbol">
-               <option value="">Select a Symbol</option>
-           </select>
-       </div>
-       <div>
-           <label for="chartType">Choose Chart Type:</label>
-           <select id="chartType" name="chartType">
-               <option value="">Select a Chart Type</option>
-               <option value="Line">Line</option>
-               <option value="Bar">Bar</option>
-           </select>
-       </div>
-       <div>
-           <label for="timeSeries">Choose Time Series:</label>
-           <select id="timeSeries" name="timeSeries">
-               <option value="">Select a Time Series</option>
-               <option value="TIME_SERIES_DAILY">Daily</option>
-               <option value="TIME_SERIES_WEEKLY">Weekly</option>
-               <option value="TIME_SERIES_MONTHLY">Monthly</option>
-               <option value="TIME_SERIES_INTRADAY">Intraday</option>
-           </select>
-       </div>
-       <div>
-           <label for="startDate">Start Date:</label>
-           <input type="date" id="startDate" name="startDate">
-       </div>
-       <div>
-           <label for="endDate">End Date:</label>
-           <input type="date" id="endDate" name="endDate">
-       </div>
-       <button type="submit">Submit</button>
-   </form>
+  <h1>Stock Data Visualizer</h1>
+  <form action="/generate_chart" method="POST">
+      <div>
+          <label for="symbol">Choose Symbol:</label>
+          <select id="symbol" name="symbol">
+              <option value="">Select a Symbol</option>
+          </select>
+      </div>
+      <div>
+          <label for="chartType">Choose Chart Type:</label>
+          <select id="chartType" name="chartType">
+              <option value="">Select a Chart Type</option>
+              <option value="Line">Line</option>
+              <option value="Bar">Bar</option>
+          </select>
+      </div>
+      <div>
+          <label for="timeSeries">Choose Time Series:</label>
+          <select id="timeSeries" name="timeSeries">
+              <option value="">Select a Time Series</option>
+              <option value="TIME_SERIES_DAILY">Daily</option>
+              <option value="TIME_SERIES_WEEKLY">Weekly</option>
+              <option value="TIME_SERIES_MONTHLY">Monthly</option>
+              <option value="TIME_SERIES_INTRADAY">Intraday</option>
+          </select>
+      </div>
+      <div>
+          <label for="startDate">Start Date:</label>
+          <input type="date" id="startDate" name="startDate">
+      </div>
+      <div>
+          <label for="endDate">End Date:</label>
+          <input type="date" id="endDate" name="endDate">
+      </div>
+      <button type="submit">Submit</button>
+  </form>
+
+  {% if chart_svg %}
+    <div id="chart-container">
+      {{ chart_svg | safe }}
+    </div>
+  {% endif %}
 </div>
+
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
